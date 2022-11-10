@@ -8,7 +8,9 @@ const auth = require('../middleware/auth')
 router.post('/register', teacherController.teacherRegistration)
 router.post('/login', teacherController.teacherLogin)
 
-router.post('/addStudent', studentController.addStudent)
-router.get('/getStudents', studentController.getStudents)
+router.get('/getStudents/:userId', auth.authentication, studentController.getStudents)
+router.post('/addStudent/:userId', auth.authentication, auth.authorization, studentController.addStudent)
+router.put('/updateStudents/:userId/:id', auth.authentication, auth.authorization,studentController.updateStudent)
+router.delete('/deleteStudents/:userId/:id', auth.authentication, auth.authorization, studentController.deleteStudent)
 
 module.exports = router
